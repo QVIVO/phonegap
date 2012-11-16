@@ -130,13 +130,16 @@
 + (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL*)URL skip:(BOOL)skip
 {
     NSAssert(IsAtLeastiOSVersion(@"5.1"), @"Cannot mark files for NSURLIsExcludedFromBackupKey on iOS less than 5.1");
-
+#ifdef NSURLIsExcludedFromBackupKey
     NSError* error = nil;
     BOOL success = [URL setResourceValue:[NSNumber numberWithBool:skip] forKey:NSURLIsExcludedFromBackupKey error:&error];
     if (!success) {
         NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
     }
     return success;
+#else
+    return NO;
+#endif
 }
 
 + (BOOL)copyFrom:(NSString*)src to:(NSString*)dest error:(NSError * __autoreleasing*)error
