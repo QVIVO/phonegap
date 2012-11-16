@@ -25,6 +25,7 @@
 #import "CDVURLProtocol.h"
 #import "CDVInvokedUrlCommand.h"
 
+#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 #import "CDVAccelerometer.h"
 #import "CDVBattery.h"
 #import "CDVCamera.h"
@@ -32,17 +33,19 @@
 #import "CDVConnection.h"
 #import "CDVContact.h"
 #import "CDVContacts.h"
+#import "CDVFile.h"
+#import "CDVSound.h"
+#endif
+
 #import "CDVCordovaView.h"
 #import "CDVDebug.h"
 #import "CDVDebugConsole.h"
 #import "CDVDevice.h"
-#import "CDVFile.h"
 #import "CDVFileTransfer.h"
 #import "CDVLocation.h"
 #import "CDVNotification.h"
 #import "CDVPluginResult.h"
 #import "CDVReachability.h"
-#import "CDVSound.h"
 #import "CDVSplashScreen.h"
 #import "CDVWhitelist.h"
 #import "CDVLocalStorage.h"

@@ -97,7 +97,9 @@
 
 - (void)vibrate:(CDVInvokedUrlCommand*)command
 {
+#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+#endif
 }
 
 @end

@@ -221,6 +221,8 @@
         [self registerPlugin:[[CDVLocalStorage alloc] initWithWebView:self.webView settings:[NSDictionary dictionaryWithObjectsAndKeys:
                     @"backupType", backupWebStorageType, nil]] withClassName:NSStringFromClass([CDVLocalStorage class])];
     }
+    
+#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 
     /*
      * This is for iOS 4.x, where you can allow inline <video> and <audio>, and also autoplay them
@@ -249,6 +251,7 @@
             }
         }
     }
+#endif
 
     /*
      * iOS 6.0 UIWebView properties
@@ -653,6 +656,7 @@
     // default to center of screen as in the original implementation. This will produce the 20px jump
     CGPoint center = CGPointMake((screenBounds.size.width / 2), (screenBounds.size.height / 2));
 
+#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
     if (CDV_IsIPad()) {
         if (!UIDeviceOrientationIsValidInterfaceOrientation(deviceOrientation)) {
             deviceOrientation = (UIDeviceOrientation)statusBarOrientation;
@@ -695,6 +699,10 @@
     } else { // not iPad
         orientedLaunchImageFile = launchImageFile;
     }
+#else
+    // Mac
+    orientedLaunchImageFile = launchImageFile;
+#endif
 
     launchImage = [UIImage imageNamed:[[self class] resolveImageResource:orientedLaunchImageFile]];
     if (launchImage == nil) {
